@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+    </style>
+    <title>欢迎来到首页</title>
+</head>
+<body>
+
+<div id="home_page">
+    <!--双向绑定-->
+    <!--{{userName}}-->
+    <!--<h1 v-model="userName"></h1>-->
+    <h1>{{details()}}</h1>
+</div>
+
+<script type="text/javascript">
+    var userLogin = new Vue({
+        el: '#home_page',
+        data: {
+            userName: 'wujianqinjian',
+        },
+        methods:{
+            details:function () {
+                return this.userName+"-- 欢迎来到今天的学习页面";
+            }
+        }
+    });
+</script>
+</body>
+</html>
