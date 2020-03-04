@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no" >
+    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 50px;
+            padding: 0px
+        }
+        .reddiv{
+            width: 70px;
+            height: 15px;
+            margin-top: 60px;
+            background: red;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<h1>不要多想，先进来看看吧！</h1>
+<div id="newapp">
+    <!--双向绑定-->
+    {{userName}}
+    <br/>
+    <input type="text" v-model="userName"/>
+    <input type="text" v-model="nameReserve"/>
+    {{password}}
+    <input type="text" v-model="password"/>
+    <br/>
+    <button type="button">登录</button>
+    {{rememberYesOrNo}}
+    <input type="checkbox" v-model="rememberYesOrNo"/>
+    {{rememberMe}}
+    <br/>
+    <!--v-if 绑定布尔关系，如果为true则生效，false则不生效-->
+    <div v-if="rememberYesOrNo" class="reddiv"></div>
+</div>
+
+<script type="text/javascript">
+    var userLogin = new Vue({
+        el: '#newapp',
+        data: {
+            userName:'用户名',
+            password:'密码',
+            rememberYesOrNo:true,
+            rememberMe:'记住我'
+        },
+        computed:{
+            nameReserve:function () {
+                var vartmp=this.userName.split("").reverse().join("");
+                return vartmp;
+        }
+
+    }
+    });
+</script>
+</body>
+</html>
