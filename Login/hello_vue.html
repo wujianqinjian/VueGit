@@ -6,7 +6,7 @@
     <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         * {
-            margin-top: 50px;
+            margin-top: 20px;
             padding: 0px
         }
         .reddiv{
@@ -15,6 +15,19 @@
             margin-top: 60px;
             background: red;
         }
+        .userName{
+            margin-left: 10px;
+        }
+        .password{
+            margin-left: 25px;
+        }
+        .submit{
+            background-size: auto;
+            background:deepskyblue;
+            box-shadow:0 0 0 .2rem rgba(38,143,255,.5);
+        }
+        .btn-primary:not(:disabled):not(.disabled).active:focus,
+        .btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(38,143,255,.5)}.btn-secondary{color:#fff;background-color:#6c757d;
     </style>
     <title>Title</title>
 </head>
@@ -23,19 +36,21 @@
 <div id="newapp">
     <!--双向绑定-->
     {{userName}}
-    <br/>
-    <input type="text" v-model="userName"/>
-    <input type="text" v-model="nameReserve"/>
-    {{password}}
-    <input type="text" v-model="password"/>
-    <br/>
-    <button type="button">登录</button>
-    {{rememberYesOrNo}}
-    <input type="checkbox" v-model="rememberYesOrNo"/>
-    {{rememberMe}}
-    <br/>
-    <!--v-if 绑定布尔关系，如果为true则生效，false则不生效-->
-    <div v-if="rememberYesOrNo" class="reddiv"></div>
+    <input type="text" class="userName" v-model="userName"/>
+    <!--<input type="text" v-model="nameReserve"/>-->
+    <div>
+        {{password}}
+        <input type="text" class="password" v-model="password"/>
+    </div>
+    <div>
+        <button type="button"  class="submit">登录</button>
+        <!--{{rememberYesOrNo}}-->
+        <input type="checkbox" v-model="rememberYesOrNo"/>
+        {{rememberMe}}
+        <!--v-if 绑定布尔关系，如果为true则生效，false则不生效-->
+        <div v-if="rememberYesOrNo" class="reddiv"></div>
+    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -49,6 +64,7 @@
         },
         computed:{
             nameReserve:function () {
+                /*reverse:将字符串倒过来,join默认是使用逗号分隔，这里的“”代表用空替换逗号*/
                 var vartmp=this.userName.split("").reverse().join("");
                 return vartmp;
         }

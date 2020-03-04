@@ -15,18 +15,38 @@
     <!--{{userName}}-->
     <!--<h1 v-model="userName"></h1>-->
     <h1>{{details()}}</h1>
+    <ul>
+    <li v-for="item in allIndex">{{item}}</li>
+    </ul>
 </div>
 
 <script type="text/javascript">
     var userLogin = new Vue({
         el: '#home_page',
+        /*注意data、methods、computed都是同级别的*/
         data: {
             userName: 'wujianqinjian',
+            techLabels:[{classifications:"Java",group1:[{name:"jvm"}]},
+                {classifications:"python",group1:[{name:"django"}]},
+                {classifications:"数据库",group1:[{name:"mysql"}]},
+                {classifications:"linux",group1:[{name:"centos"}]}]
         },
+        /*显示方法*/
         methods:{
             details:function () {
                 return this.userName+"-- 欢迎来到今天的学习页面";
             }
+        },
+        /*计算数据*/
+        computed:{
+            allIndex:  function () {
+                var list=[];
+                for(var i in this.techLabels){
+                    var oneGroup=this.techLabels[i];
+                    list.push(oneGroup.classifications);
+                }
+                return list;
+            },
         }
     });
 </script>
