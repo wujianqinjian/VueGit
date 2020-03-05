@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">-->
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 100px;
+            padding: 0px
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    {{message}}
+</div>
+
+<script type="text/javascript">
+    /*查看监控日志*/
+    var newHello = new Vue({
+        el: '#newapp',
+        data: {
+            message:0
+        },
+        created:function () {
+            console.log("组件创建")
+        },
+        mounted: function () {
+            console.log("组件挂载")
+        },
+        updated:function () {
+            console.log("组件执行了更新")
+        },
+        watch: {
+            message: function (newValue, oldValue) {
+                console.log("新" + newValue, "旧的" + oldValue)
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

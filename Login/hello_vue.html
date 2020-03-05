@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no" >
-    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         * {
             margin-top: 20px;
@@ -64,7 +64,7 @@
         },
         computed:{
             nameReserve:function () {
-                /*reverse:将字符串倒过来,join默认是使用逗号分隔，这里的“”代表用空替换逗号*/
+                /*nameReserve属性:将字符串倒过来,join默认是使用逗号分隔，这里的“”代表用空替换逗号*/
                 var vartmp=this.userName.split("").reverse().join("");
                 return vartmp;
         }

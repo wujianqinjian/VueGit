@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 100px;
+            padding: 0px
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    {{messge}}
+</div>
+<div id="newapp2"></div>
+
+<div id="id"></div>
+
+<script type="text/javascript">
+    var newHello = vue({
+        el: '#newapp',
+        data: {
+            message: 'hello Vue'
+        }
+    });
+</script>
+</body>
+</html>

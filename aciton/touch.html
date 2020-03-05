@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+
+        button{
+            font-size: 25px;
+        }
+        .onclick{
+            width: 65px;
+            height: 30px;
+            background-color: red;
+        }
+
+    </style>
+    <title>标题</title>
+</head>
+<body>
+
+<div id="newapp">
+    <!--双向绑定-->
+    <!--{{onclicked}}-->
+    <button   v-on:touchstart="btnClick">{{btnText}}</button>
+    <button   v-on:touchend="btnClick">{{btnText}}</button>
+    <div v-if="onclicked" class="onclick" ></div>
+</div>
+
+<script type="text/javascript">
+    var userLogin = new Vue({
+        el: '#newapp',
+        data: {
+            onclicked: false,
+            btnText:"点击"
+        },
+        methods:{
+            /*ev 代表被点击目标*/
+            btnClick:function (ev) {
+            /*alert(ev.target.innerText);*/
+            this.onclicked=!this.onclicked;
+            this.btnText=(this.onclicked)?'隐藏':'展示';
+        }
+        }
+    });
+</script>
+</body>
+</html>

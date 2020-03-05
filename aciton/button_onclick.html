@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
-    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
-        .back_red{
-            background: red;
-            color: red;
-        }
+
         button{
             font-size: 25px;
         }
         .onclick{
-            width: 100px;
-            height: 100px;
+            width: 65px;
+            height: 30px;
             background-color: red;
         }
+
     </style>
     <title>标题</title>
 </head>
@@ -25,7 +23,7 @@
 <div id="newapp">
     <!--双向绑定-->
     <!--{{onclicked}}-->
-    <button  type="button" v-on:click="btnClick" >{{btnText}}</button>
+    <button  type="button" v-on:click="btnClick">{{btnText}}</button>
     <div v-if="onclicked" class="onclick" ></div>
 </div>
 
@@ -33,7 +31,7 @@
     var userLogin = new Vue({
         el: '#newapp',
         data: {
-            onclicked: false,
+            onclicked: true,
             btnText:"点击"
         },
         methods:{
