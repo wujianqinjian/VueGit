@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 5px;
+            padding: 0px;
+            height: 10px;
+        }
+        #label_id {
+            height: 10px;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    <div id="if_else_test">
+        <h5 v-if="if_test_data">If the data is </h5>
+        <h5 v-else >else is</h5>
+    </div>
+</div>
+<div id="if_elif_test">
+    <h5>余额：{{balance}}</h5>
+    <label id="label_id">请输入取现金额</label>
+    <input  placeholder="请输入取现金额" >
+    <!--{{balance}},{{amount}}-->
+    <h1 v-if="balance >amount">取款成功 </h1>
+    <h1 v-else-if="balance =amount">全部提现 </h1>
+    <h1 v-else-if="balance < amount">余额不足 </h1>
+</div>
+
+<script type="text/javascript">
+/*    var v_if_else_test = new Vue({
+        el: '#if_else_test',
+        data: {
+            if_test_data: false
+        }
+    });*/
+    var v_if_elif_test  = new Vue({
+        el:'#if_elif_test',
+        data:{
+                amount: 100000,
+                balance:100000
+        }
+    });
+</script>
+</body>
+</html>

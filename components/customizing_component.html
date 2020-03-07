@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">-->
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 10px;
+            padding: 0px;
+            height:15px;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="my_customizing_component_page">
+    <h4>{{wx_id}}</h4>
+    <h4>{{nick_name}}</h4>
+    <h4>{{head_image}}</h4>
+</div>
+<template type="text/x-tempalte" id="my_customizing_component_template">
+    <h3>{{wx_id}}</h3>
+    <h3>{{nick_name}}</h3>
+    <h3>{{head_image}}</h3>
+</template>
+
+<script type="text/javascript">
+    var my_customizing_component= Vue.extend({
+        data:function () {
+            return{
+                wx_id:"miao900508",
+                nick_name:".",
+                head_image:"https://blog.csdn.net/u010569419"
+            }
+        }
+    })
+
+    var v_variable_name = new my_customizing_component({
+        el: '#my_customizing_component_page'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 100px;
+            padding: 0px
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    <my-header></my-header>
+    <login-button></login-button>
+</div>
+
+<script type="text/javascript">
+    /**/
+    Vue.component('my-header',{
+            template:"<h1>商品详情</h1>"
+    })
+    Vue.component('login-button',{
+        template:"<button>登录按钮</button>\n"
+    })
+    var newHello = new Vue({
+        el: '#newapp'
+    })
+</script>
+</body>
+</html>

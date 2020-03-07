@@ -2,27 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
-    <script src="vue.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         * {
-            margin-top: 100px;
+            margin-top: 10px;
             padding: 0px
         }
     </style>
     <title>Title</title>
 </head>
 <body>
-<div id="newapp">
-    {{messge}}
+<div id="local_component_test">
+    <!--<my-header></my-header>-->
+    <welcome_vue></welcome_vue>
+    <shop_page></shop_page>
 </div>
-<div id="newapp2"></div>
+<template type="text/x-template" id="my-local-template">
+    <div>
+        <h3>商品名称</h3>
+        <h4>价格:{{price}}</h4>
+    </div>
+</template>
+<template type="text/x-template" id="main_title">
+    <h1> 欢迎来到Vue世界</h1>
+</template>
 
-<div id="id"></div>
 
 <script type="text/javascript">
-    var newHello = vue({
-        el: '#newapp',
+    var v_local_component = new Vue({
+        el: '#local_component_test',
+        components:{
+            "shop_page":{
+            template:"#my-local-template",
+                    data:function(){
+                    return{
+                        price:99.00
+                    }
+                }
+            },
+            "welcome_vue":{
+                template: "#main_title"
+            }
+        },
         data: {
             message: 'hello Vue'
         }
