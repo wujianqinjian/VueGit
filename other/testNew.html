@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 10px;
+            padding: 0px;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    <h3>谁被点击了</h3>
+    <testbutton @btn-click="btnClickNew"></testbutton>
+    <testbutton2 @btn-click="btnClickNew"></testbutton2>
+</div>
+<template id="testbutton-tem">
+    <div id="testbutton" >
+        <button @click="btnClick">测试One</button>
+        <button @click="btnClick">测试Two</button>
+    </div>
+</template>
+<template id="testbutton-tem2">
+    <div id="testbutton2" >
+        <button @click="btnClick">测试2One</button>
+        <button @click="btnClick">测试2Two</button>
+    </div>
+</template>
+<script type="text/javascript">
+    var v_variable_name = new Vue({
+        el: '#newapp',
+        components:{
+            testbutton:{
+                template:"#testbutton-tem",
+                methods:{
+                    btnClick:function (ev) {
+                        this.$emit("btn-click",ev.target.innerText)
+                    }
+                }
+            },
+            testbutton2:{
+                template:"#testbutton-tem2",
+                methods:{
+                    btnClick:function (ev) {
+                        this.$emit("btn-click",ev.target.innerText)
+                    }
+                }
+            }
+
+    },
+        methods:{
+            btnClickNew : function (txt) {
+                var h3=document.getElementsByTagName("h3")[0];
+                h3.innerText=txt+'被点击了'
+            }
+        }
+    });
+</script>
+</body>
+</html>

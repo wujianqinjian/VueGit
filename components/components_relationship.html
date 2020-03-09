@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 15px;
+            padding: 0px;
+            height: 5px;
+        }
+    </style>
+    <title>父子组件</title>
+</head>
+<!--父组件将数据传递给子组件-->
+<body>
+<div id="newapp">
+    <!--注意html标签中不允许有大写，script中不允许有变量名有"-"-->
+    <comment :is-show="isShow" :comments="comments" :like_numbers="likeNumbers"></comment>
+</div>
+
+<template id="comments-tem">
+    <div id="comment">
+        <div v-if="isShow">用户评论:</div>
+        <h4 v-for="item in comments">{{item}}</h4>
+        <h4>{{likeNumbers}}</h4>
+    </div>
+</template>
+
+<script type="text/javascript">
+    var v_variable_name = new Vue({
+        el: '#newapp',
+        data: {
+            isShow: true,
+            comments:["超nice","wujianqinjian讲的还行","樊瑞是做什么的？"],
+            likeNumbers:99
+        },
+        /*组件的单词注意不要丢s*/
+        components:{
+            comment:{
+                 template:"#comments-tem",
+                 props:["isShow","comments","likeNumbers"]
+            }
+        }
+    });
+</script>
+</body>
+</html>

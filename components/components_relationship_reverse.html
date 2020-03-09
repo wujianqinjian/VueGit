@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 0px;
+            padding: 0px;
+
+        }
+        #newapp{
+            border: 3px dashed red;
+        }
+        #mycom{
+            border: 3px dashed blue;
+        }
+
+        #mycom button{
+            font-size: 20px;
+            margin: 5px;
+        }
+    </style>
+    <title>子组件传递数据给父组件</title>
+</head>
+<!--1 创建子组件(通过模板定义子组件内容)-->
+<body>
+<div id="newapp">
+    <h3>这个是父组件</h3>
+    <h4>被谁点击了呢？</h4>
+    <!--子组件将数据传递到父组件-->
+    <mycom @btn-click="btnClickParent"></mycom>
+</div>
+<template id="mycom-tem">
+    <div id="mycom">
+        <button @click="btnClick">子组件元素1</button>
+        <button @click="btnClick">子组件元素2</button>
+    </div>
+</template>
+
+<script type="text/javascript">
+    var v_variable_name = new Vue({
+        el: '#newapp',
+        components:{
+            mycom:{
+                template:"#mycom-tem",
+                methods: {
+                    btnClick:function (ev) {
+                        this.$emit("btn-click",ev.target.innerText)
+                    }
+                }
+            }
+        },
+        methods: {
+            /*点击方法，获取子组件数据*/
+            btnClickParent : function (txt) {
+            var h4=document.getElementsByTagName("h4")[0];
+            h4.innerText=txt+"被点击了"
+    }
+        }
+    });
+</script>
+</body>
+</html>

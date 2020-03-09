@@ -6,23 +6,24 @@
     <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         * {
-            margin-top: 100px;
+            margin-top: 5px;
             padding: 0px;
-            height: 25px;
+            height: 5px;
         }
     </style>
     <title>Title</title>
 </head>
 <body>
 <div id="newapp">
-    <div v-if="isShow">客户评论</div>
-    {{}}
+    <div v-if="isShow">用户评论:</div>
+    <h4 v-for="item in comments">{{item}}</h4>
 </div>
 <script type="text/javascript">
     var v_variable_name = new Vue({
         el: '#newapp',
         data: {
-            isShow: false
+            isShow: false,
+            comments:["超nice","wujianqinjian讲的还行","樊瑞是做什么的？"],
         }
     });
 </script>
