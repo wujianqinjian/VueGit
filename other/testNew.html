@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="newapp">
-    <h3>谁被点击了</h3>
+    <h3 ref="h30">谁被点击了</h3>
     <testbutton @btn-click="btnClickNew"></testbutton>
     <testbutton2 @btn-click="btnClickNew"></testbutton2>
 </div>
@@ -54,7 +54,8 @@
     },
         methods:{
             btnClickNew : function (txt) {
-                var h3=document.getElementsByTagName("h3")[0];
+                /*var h3=document.getElementsByTagName("h3")[0];*/
+                var h3=this.$refs.h30;
                 h3.innerText=txt+'被点击了'
             }
         }
