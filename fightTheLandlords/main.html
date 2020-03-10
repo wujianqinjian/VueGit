@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        #top{
+            margin-top: 1px;
+        }
+        #top_left{
+            margin-top: 1px;
+            padding: 1px;
+            height: 63px;
+            width: 270px;
+
+        }
+        #main_head{
+            margin-top: 1px;
+            height: 45px;
+            width: 55px;
+        }
+        #main_nickname{
+            /*margin-top: -25px;*/
+            margin-left: 15px;
+            position: fixed;
+            height: 45px;
+            width: 55px;
+
+        }
+        h5{
+
+            padding-top: -1px;
+        }
+        /*元素横向换行display:inline*/
+        .div-inline{ display:inline}
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    <div id="top">
+        <div id="top_left" class="div-inline">
+            <div id="main_head" class="div-inline"><img src="../sources/head.jpg" width="40" height="40" alt="牛头梗" /></div>
+            <div id="main_nickname" class="div-inline"><h5 style="height: 10px">test</h5></div>
+
+            </div>
+            <div id="main_vip_level"></div>
+            <div id="main_vip_rewards"></div>
+            <div id="main_game_fanfanle"></div>
+
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var v_variable_name = new Vue({
+        el: '#newapp',
+        data: {}
+    });
+</script>
+</body>
+</html>
