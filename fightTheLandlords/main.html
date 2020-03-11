@@ -6,44 +6,47 @@
     <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         #top{
-            margin-top: 1px;
+            /*内容区*/
+            width: 1080px;
+            height: 100px;
+            background-color: green;
+            /*border 边框的大小会影响到div的大小
+            border-color: red border-width: 3px border-style: solid;*/
+            border:3px  solid;
+            border-color: red orange blue yellow;
+
+
+
         }
         #top_left{
-            margin-top: 1px;
-            padding: 1px;
-            height: 63px;
-            width: 270px;
-
+            float: left;
+            width: 85px;
+            height: 55px;
         }
         #main_head{
-            margin-top: 1px;
-            height: 45px;
-            width: 55px;
+            float: left;
+            width: 80px;
+            height: 50px;
         }
         #main_nickname{
-            /*margin-top: -25px;*/
-            margin-left: 15px;
-            position: fixed;
-            height: 45px;
-            width: 55px;
-
+            float: left;
+            width: 80px;
+            height: 50px;
         }
         h5{
-
-            padding-top: -1px;
         }
         /*元素横向换行display:inline*/
-        .div-inline{ display:inline}
+        /*.div-inline{ display:inline}*/
     </style>
     <title>Title</title>
 </head>
 <body>
 <div id="newapp">
     <div id="top">
-        <div id="top_left" class="div-inline">
-            <div id="main_head" class="div-inline"><img src="../sources/head.jpg" width="40" height="40" alt="牛头梗" /></div>
-            <div id="main_nickname" class="div-inline"><h5 style="height: 10px">test</h5></div>
-
+        <div id="top_left">
+            <div id="main_head"><img src="../sources/head.jpg" width="40" height="40" alt="牛头梗" /></div>
+            <div id="main_nickname" >
+                <div><h5 style="height: 10px">test</h5></div>
             </div>
             <div id="main_vip_level"></div>
             <div id="main_vip_rewards"></div>
