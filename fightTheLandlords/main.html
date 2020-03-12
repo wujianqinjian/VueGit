@@ -8,48 +8,80 @@
         #top{
             /*内容区*/
             width: 1080px;
-            height: 100px;
+            height: 60px;
             background-color: green;
             /*border 边框的大小会影响到div的大小
             border-color: red border-width: 3px border-style: solid;*/
             border:3px  solid;
             border-color: red orange blue yellow;
-
-
-
         }
         #top_left{
             float: left;
-            width: 85px;
-            height: 55px;
+            width: 400px;
+            height: 58px;
         }
         #main_head{
             float: left;
-            width: 80px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
+            background-color: yellow;
+        }
+        #nickname_levelmessage{
+            float: left;
+            width: 120px;
+            height: 60px;
+            background-color: orange;
         }
         #main_nickname{
-            float: left;
-            width: 80px;
-            height: 50px;
+            width: 120px;
+            height: 30px;
+            background-color: aliceblue;
         }
-        h5{
+        #level{
+            width: 120px;
+            height: 30px;
+            background-color: grey;
+            padding-bottom: 1px;
+        }
+        #level_text{
+            width: 30px;
+            height: 21px;
+            background-color: orangered;
+            padding-top: 10px;
+            margin: 1px;
+        }
+        #level_image{
+            width: 78px;
+            height: 23px;
+            background-color: palevioletred;
+            padding-top: 5px;
+            margin: 1px;
         }
         /*元素横向换行display:inline*/
-        /*.div-inline{ display:inline}*/
+        .div-inline{
+            display:inline-block
+        }
     </style>
     <title>Title</title>
 </head>
 <body>
 <div id="newapp">
     <div id="top">
-        <div id="top_left">
-            <div id="main_head"><img src="../sources/head.jpg" width="40" height="40" alt="牛头梗" /></div>
-            <div id="main_nickname" >
-                <div><h5 style="height: 10px">test</h5></div>
+        <div id="top_left" class="div-inline">
+            <div id="main_head" class="div-inline"><img src="../sources/head.jpg" width="60" height="60" alt="牛头梗" /></div>
+            <div id="nickname_levelmessage" class="div-inline">
+                <div id="main_nickname" class="div-inline" style="font-family:FZZhunYuan-M02S;"><span>wujianqinjian</span></div>
+                <div id="level">
+                    <div id="level_text" class="div-inline">
+                        <span style="font-size: 10px;font-weight:bold">10级</span>
+                    </div>
+                    <div id="level_image" class="div-inline">
+                        <img src="../sources/c_progress_bar.png" width="74" height="20" alt="进度条" />
+                    </div>
+                </div>
             </div>
-            <div id="main_vip_level"></div>
-            <div id="main_vip_rewards"></div>
+            <div id="main_vip_level" class="div-inline"><img src="../sources/vip_level_bronze.png" width="60" height="60" alt="vip图标" /></div>
+            <div id="main_vip_rewards" class="div-inline"><img src="../sources/vip_rewards.png" width="90" height="60" alt="vip图标" /></div>
             <div id="main_game_fanfanle"></div>
 
         </div>
