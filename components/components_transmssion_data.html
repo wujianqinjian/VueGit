@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">-->
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+    </style>
+    <title>标题</title>
+</head>
+<body>
+
+<div id="newapp">
+    <mybutton></mybutton>
+    <mylist></mylist>
+</div>
+<template id="mybutton-tem">
+    <div id="mybutton">
+        <button>展示数据ONE</button>
+        <button>隐藏数据ONE</button>
+    </div>
+</template>
+<template id="mylist-tem">
+    <div id="mylist">
+    <ul>
+        <li>数据ONE1</li>
+        <li>数据ONE2</li>
+        <li>数据ONE2</li>
+    </ul>
+    </div>
+</template>
+
+<script type="text/javascript">
+    var userLogin = new Vue({
+        el: '#newapp',
+        components:{
+            mybutton:{
+                template:"#mybutton-tem"
+            },
+            mylist:{
+                template:"#mylist-tem"
+            }
+        }
+    });
+</script>
+</body>
+</html>
