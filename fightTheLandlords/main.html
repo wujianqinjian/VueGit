@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        #top{
+            /*内容区*/
+            width: 1080px;
+            height: 100px;
+            background-color: green;
+            /*border 边框的大小会影响到div的大小
+            border-color: red border-width: 3px border-style: solid;*/
+            border:3px  solid;
+            border-color: red orange blue yellow;
+
+
+
+        }
+        #top_left{
+            float: left;
+            width: 85px;
+            height: 55px;
+        }
+        #main_head{
+            float: left;
+            width: 80px;
+            height: 50px;
+        }
+        #main_nickname{
+            float: left;
+            width: 80px;
+            height: 50px;
+        }
+        h5{
+        }
+        /*元素横向换行display:inline*/
+        /*.div-inline{ display:inline}*/
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    <div id="top">
+        <div id="top_left">
+            <div id="main_head"><img src="../sources/head.jpg" width="40" height="40" alt="牛头梗" /></div>
+            <div id="main_nickname" >
+                <div><h5 style="height: 10px">test</h5></div>
+            </div>
+            <div id="main_vip_level"></div>
+            <div id="main_vip_rewards"></div>
+            <div id="main_game_fanfanle"></div>
+
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    var v_variable_name = new Vue({
+        el: '#newapp',
+        data: {}
+    });
+</script>
+</body>
+</html>
