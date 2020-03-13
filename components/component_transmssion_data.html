@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalmylist-temle-no">
+    <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 10px;
+            padding: 0px;
+            height: 5px;
+        }
+
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+        <div>
+            <mybutton></mybutton>
+        </div>
+        <p></p>
+        <div>
+         <mylist></mylist>
+        </div>
+</div>
+
+<template id="mybutton-tem">
+    <div id="mybutton">
+        <button style="height: 20px">展示数据ONE</button>
+        <button style="height: 20px">隐藏数据ONE</button>
+    </div>
+</template>
+<template id="mylist-tem">
+    <div id="mylist">
+        <ul>
+            <li>数据ONE-1</li>
+            <li>数据ONE-2</li>
+            <li>数据ONE-3</li>
+            <li>数据ONE-4</li>
+        </ul>
+    </div>
+</template>
+<script type="text/javascript">
+    var v_varmylist_transmssion = new Vue({
+        el: '#newapp',
+        components:{
+            mybutton:{
+                template: "#mybutton-tem"
+            },
+            mylist:{
+                template: "#mylist-tem"
+            },
+        }
+    });
+</script>
+</body>
+</html>
