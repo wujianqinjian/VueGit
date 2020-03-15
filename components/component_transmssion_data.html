@@ -42,14 +42,27 @@
     </div>
 </template>
 <script type="text/javascript">
+    var emptyvue=new Vue()
     var v_varmylist_transmssion = new Vue({
         el: '#newapp',
         components:{
             mybutton:{
-                template: "#mybutton-tem"
+                template: "#mybutton-tem",
+                data:function(){
+                    return {
+                        showdata:["数据ONE-1","数据ONE-2"],
+                        hidedata:["数据ONE-1","数据ONE-2"]
+                    }
+                },
+                showData:function (ev) {
+                    emptyvue.$emit("showdata",)
+                }
             },
             mylist:{
-                template: "#mylist-tem"
+                template: "#mylist-tem",
+                hideData:function () {
+
+                }
             },
         }
     });
