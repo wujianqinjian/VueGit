@@ -6,14 +6,9 @@
     <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         * {
-            margin: 0px;
+            margin-top: 10px;
             padding: 0px;
-        }
-        #mybuttonid{
-            border: 3px dashed orange;
-        }
-        #mylistid{
-            border: 3px dashed blue;
+            height: 5px;
         }
 
     </style>
@@ -21,18 +16,19 @@
 </head>
 <body>
 <div id="newapp">
-        <div id="mybuttonid">
+        <div>
             <mybutton></mybutton>
         </div>
+        <p></p>
         <div>
-         <mylist id="mylistid"></mylist>
+         <mylist></mylist>
         </div>
 </div>
 
 <template id="mybutton-tem">
     <div id="mybutton">
-        <button @click="showClick" style="height: 20px">展示数据ONE</button>
-        <button @click="hideClick" style="height: 20px">隐藏数据ONE</button>
+        <button style="height: 20px">展示数据ONE</button>
+        <button style="height: 20px">隐藏数据ONE</button>
     </div>
 </template>
 <template id="mylist-tem">
@@ -52,17 +48,21 @@
         components:{
             mybutton:{
                 template: "#mybutton-tem",
-                methods:{
-                    showClick:function (ev) {
-                        emptyvue.$emit("showdata")
-                    },
-                     hideClick:function () {
-
+                data:function(){
+                    return {
+                        showdata:["数据ONE-1","数据ONE-2"],
+                        hidedata:["数据ONE-1","数据ONE-2"]
                     }
-            },
+                },
+                showData:function (ev) {
+                    emptyvue.$emit("showdata",)
+                }
             },
             mylist:{
-                template: "#mylist-tem"
+                template: "#mylist-tem",
+                hideData:function () {
+
+                }
             },
         }
     });
