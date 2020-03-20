@@ -6,9 +6,14 @@
     <script src="../vue.js" type="text/javascript" charset="UTF-8"></script>
     <style type="text/css">
         * {
-            margin-top: 10px;
+            margin: 0px;
             padding: 0px;
-            height: 5px;
+        }
+        #mybuttonid{
+            border: 3px dashed orange;
+        }
+        #mylistid{
+            border: 3px dashed blue;
         }
 
     </style>
@@ -16,19 +21,18 @@
 </head>
 <body>
 <div id="newapp">
-        <div>
+        <div id="mybuttonid">
             <mybutton></mybutton>
         </div>
-        <p></p>
         <div>
-         <mylist></mylist>
+         <mylist id="mylistid"></mylist>
         </div>
 </div>
 
 <template id="mybutton-tem">
     <div id="mybutton">
-        <button style="height: 20px">展示数据ONE</button>
-        <button style="height: 20px">隐藏数据ONE</button>
+        <button @click="showClick" style="height: 20px">展示数据ONE</button>
+        <button @click="hideClick" style="height: 20px">隐藏数据ONE</button>
     </div>
 </template>
 <template id="mylist-tem">
@@ -42,11 +46,20 @@
     </div>
 </template>
 <script type="text/javascript">
+    var emptyvue=new Vue();
     var v_varmylist_transmssion = new Vue({
         el: '#newapp',
         components:{
             mybutton:{
-                template: "#mybutton-tem"
+                template: "#mybutton-tem",
+                methods:{
+                    showClick:function (ev) {
+                        emptyvue.$emit("showdata")
+                    },
+                     hideClick:function () {
+
+                    }
+            },
             },
             mylist:{
                 template: "#mylist-tem"

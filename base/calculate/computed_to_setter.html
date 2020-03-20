@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width initial-scale=1.0 user-scalable-no">
+    <script src="../../vue.js" type="text/javascript" charset="UTF-8"></script>
+    <style type="text/css">
+        * {
+            margin-top: 10px;
+            padding: 0px;
+            height: 10px;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+<div id="newapp">
+    {{fullname}}
+</div>
+<script type="text/javascript">
+    var v_variable_name = new Vue({
+        el: '#newapp',
+        data: {
+            firstname: "wang",
+            lastname: "wu"
+        },
+        computed:{
+            fullname: {
+                get:function () {
+                    return this.firstname+ " "+ this.lastname
+                },
+                set:function (newName) {
+                    var names=newName.split('')
+                    this.firstname=names[0]
+                    this.lastname=names[names.length-1]
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
