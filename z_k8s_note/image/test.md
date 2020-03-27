@@ -85,11 +85,11 @@ Kubernetes 网络
 2. Pod间可以通过：Overlay 网络模式
 3. Pod与Service：各个node的iptables规则（防火墙协议）\ LVS
 
-![](k8s_base_note_files/2.jpg)
+![](k8s_network.png)
 
 - flannel网络服务：为k8s创建一个overlay网络。
   - overlay网络：为每一个容器在集群中分配一个虚拟IP，不同节点的容器之间通过虚拟IP通信！
   
-![](k8s_base_note_files/1.png)
+![](overlay_network.png)
 
 ----------------------
