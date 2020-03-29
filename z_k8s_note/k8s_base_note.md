@@ -57,8 +57,8 @@ Pod
 
 - HPA :弹性伸缩
 
-- 无状态服务：nginx、tomcat等
-- 有状态服务：mysql、mongoDB等
+- 无状态服务：nginx、tomcat等等
+- 有状态服务：mysql、mongoDB等等
 
 - StateFulset：解决有状态服务的问题
   1. 稳定持久化存储
