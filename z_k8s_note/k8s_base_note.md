@@ -88,7 +88,4 @@ Kubernetes 网络
 
 - flannel网络服务：为k8s创建一个overlay网络。
   - overlay网络：为每一个容器在集群中分配一个虚拟IP，不同节点的容器之间通过虚拟IP通信！
-
 ![](image/k8s_network.png)
-
-----------------------
