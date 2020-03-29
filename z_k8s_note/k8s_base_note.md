@@ -68,7 +68,7 @@ Pod
 - DaemonSet： 确保全部或部分node上运行一个Pod副本！
   自我理解为当新加一个node后，为该node分配一个Pod副本，
   如果当前node有Pod，则当前node上的Pod在其他node上也会分配Pod副本！
-- job：处理批处理任务，可判断程序是否正常退出（类似java的事务吧？？？）
+- job：处理批处理任务，可判断程序是否正常退出（类似java的事务吧？）
 
 
 服务发现
@@ -88,7 +88,6 @@ Kubernetes 网络
 
 - flannel网络服务：为k8s创建一个overlay网络。
   - overlay网络：为每一个容器在集群中分配一个虚拟IP，不同节点的容器之间通过虚拟IP通信！
-  
-![](image/k8s_network_fannel.png)
+![](image/k8s_network.png)
 
 ----------------------
