@@ -111,3 +111,70 @@ K8S安装
 	2. yum makecache
 - 安装依赖：
 	1. yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
+
+
+121.36.148.61 k8s-master01
+119.3.29.205 k8s-node01
+121.36.131.14 k8s-node02
+
+- 安装依赖:
+  yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
+
+
+- 设置防火墙为iptables 并设置空规则
+	systemctl stop firewalld && systemctl disable firewalld
+	yum -y install iptables-services && systemctl start iptables && systemctl
+	问题解决:  1 chkconfig cloudResetPwdAgent off
+	          2 chkconfig cloudResetPwdUpdateAgent off
+	官网解决方法:
+	1 vi /etc/cloud/cloud.cfg 
+	2 manage_etc_hosts: true 
+
+	enable iptables && iptables -F && service iptables save
+
+
+	swappoff  -a && sed -i '/ swap / s/^\(.*)$/#\1/g' /etc/fstab
+	setenforce && sed -i 's/^SELINUX=.*/SELINUX='
+
+
+
+$ cat > /etc/yum.repos.d/kubernetes.repo << EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+
+将桥接的IPv4流量传递到iptables的链：
+$ cat > /etc/sysctl.d/k8s.conf << EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+同步时间:
+ntpdate time.windows.com
+
+
+
+
+
+/etc/kubernetes/config
+
+
+
+
+
+
+yum install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
+
+
+
+kubeadm init \
+  --apiserver-advertise-address=192.168.0.25 \
+  --image-repository registry.aliyuncs.com/google_containers \
+  --kubernetes-version v1.17.0 \
+  --service-cidr=10.1.0.0/16 \
+  --pod-network-cidr=10.244.0.0/16
