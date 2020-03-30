@@ -96,49 +96,78 @@ Kubernetes 网络
 
 K8S安装
 ----------------------------------
-- 设置主机名称：
-	1. hostnamectl set-hostname k8s-master
-	2. hostnamectl set-hostname k8s-node01
-	3. hostnamectl set-hostname k8s-node02
-- 设置DNS解析IP：此处通过修改host文件
-   1. vim /etc/hosts
-   2. 文件末尾添加：
-		121.36.148.61 k8s-master01
-		119.3.29.205 k8s-node01
-		121.36.131.14 k8s-node02
-- 配置yum源：
-	1. wget -O /etc/yum.repos.d/CentOS-Base-huawei.repo https://mirrors.huaweicloud.com/repository/conf/CentOS-7-anon.repo
-	2. yum makecache
-- 安装依赖：
-	1. yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
+- 关闭防火墙：
+ systemctl stop firewalld
+ systemctl disable firewalld
+
+- 关闭selinux：
+  sed -i 's/enforcing/disabled/' /etc/selinux/config 
+  setenforce 0
+
+关闭swap：
+  swapoff -a
+
+- 设置主机名
+hostnamectl set-hostname master
+hostnamectl set-hostname k8s-node1
+hostnamectl set-hostname k8s-node2
 
 
-121.36.148.61 k8s-master01
-119.3.29.205 k8s-node01
-121.36.131.14 k8s-node02
-
-- 安装依赖:
-  yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
-
-
-- 设置防火墙为iptables 并设置空规则
-	systemctl stop firewalld && systemctl disable firewalld
-	yum -y install iptables-services && systemctl start iptables && systemctl
-	问题解决:  1 chkconfig cloudResetPwdAgent off
-	          2 chkconfig cloudResetPwdUpdateAgent off
-	官网解决方法:
-	1 vi /etc/cloud/cloud.cfg 
-	2 manage_etc_hosts: true 
-
-	enable iptables && iptables -F && service iptables save
-
-
-	swappoff  -a && sed -i '/ swap / s/^\(.*)$/#\1/g' /etc/fstab
-	setenforce && sed -i 's/^SELINUX=.*/SELINUX='
+- 设置host绑定关系（这里有个坑，公网IP貌似kubeadm init时会报错【需要开相关端口】，内网IP则OK）
+公网：
+cat >> /etc/hosts << EOF
+121.36.162.228  k8s-master
+119.3.29.205    k8s-node1
+121.36.131.14   k8s-node2
+EOF
+内网：
+cat >> /etc/hosts << EOF
+192.168.0.179  k8s-master
+192.168.0.25    k8s-node1
+192.168.0.93   k8s-node2
+EOF
 
 
 
-$ cat > /etc/yum.repos.d/kubernetes.repo << EOF
+- 设置流量转发（官网建议）：
+ 	cat > /etc/sysctl.d/k8s.conf << EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+    执行生效：
+    sysctl --system
+
+
+- 安装docker：
+  配置阿里云源：
+  wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+  安装docker（最好是18及以上版本，否则可能会...）：
+  yum -y install docker-ce-18.06.1.ce-3.el7
+  设置开机启动：
+  systemctl enable docker && systemctl start docker
+  检查安装：
+  docker --version
+  *版本18即安装成功
+
+  (XSHELL 工具--发送输入到所有会话)
+  - 安装一些依赖：
+   yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
+
+  - 同步时间：
+   ntpdate time.windows.com
+  
+  配置阿里云镜像加速器：
+  sudo mkdir -p /etc/docker
+  sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+"registry-mirrors": ["https://vkayqpp3.mirror.aliyuncs.com"]
+}
+EOF
+	sudo systemctl daemon-reload
+	sudo systemctl restart docker
+
+- 添加阿里云yum源
+ 	cat > /etc/yum.repos.d/kubernetes.repo << EOF
 [kubernetes]
 name=Kubernetes
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
@@ -148,33 +177,64 @@ repo_gpgcheck=1
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF
 
-将桥接的IPv4流量传递到iptables的链：
-$ cat > /etc/sysctl.d/k8s.conf << EOF
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1
-EOF
+- 安装kubeadm，kubelet和kubectl
+  yum install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
 
-同步时间:
-ntpdate time.windows.com
+  设置开机启动：  
+  systemctl enable kubelet
 
+  (XSHELL 工具--发送输入到所有会话  先关闭这个功能)
 
 
 
 
-/etc/kubernetes/config
-
-
-
-
-
-
-yum install -y kubelet-1.17.0 kubeadm-1.17.0 kubectl-1.17.0
-
-
-
+- 【公网】在master节点执行初始化（master地址：121.36.162.228）：
 kubeadm init \
-  --apiserver-advertise-address=192.168.0.25 \
-  --image-repository registry.aliyuncs.com/google_containers \
-  --kubernetes-version v1.17.0 \
-  --service-cidr=10.1.0.0/16 \
-  --pod-network-cidr=10.244.0.0/16
+--apiserver-advertise-address=121.36.162.228 \
+--image-repository registry.aliyuncs.com/google_containers \
+--kubernetes-version v1.17.0 \
+--service-cidr=10.1.0.0/16 \
+--pod-network-cidr=10.244.0.0/16
+- 【内网】
+kubeadm init \
+--apiserver-advertise-address=192.168.0.179 \
+--image-repository registry.aliyuncs.com/google_containers \
+--kubernetes-version v1.17.0 \
+--service-cidr=10.1.0.0/16 \
+--pod-network-cidr=10.244.0.0/16
+
+- 复制命令，设置kubectl 连接：
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+--------------------------------------
+以下还有点问题
+
+
+
+
+
+
+
+- 安装网络插件：
+执行：  wget:https://raw.githubusercontent.com/coreos/flannel/a70459be0084506e4ec919aa1c114638878db11b/Documentation/kube-flannel.yml
+docker pull 
+也可以官网安装：https://github.com/coreos/flannel
+
+
+- 在其他终端复制命令，让其加入：
+kubeadm join 192.168.0.179:6443 --token gytw5j.s17r2eztwxobwbs4 \
+    --discovery-token-ca-cert-hash sha256:f5062698588983af4aade27f8df594dc17280ebef486d9c1419bf1006eb13d9f
+
+- 测试一下，查看默认pod：
+kubectl get pods -n kube-system
+
+
+
+
+
+
+
+
