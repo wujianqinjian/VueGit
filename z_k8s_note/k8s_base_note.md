@@ -90,3 +90,24 @@ Kubernetes 网络
   - overlay网络：为每一个容器在集群中分配一个虚拟IP，不同节点的容器之间通过虚拟IP通信！
 
 ![](image/k8s_network.png)
+
+
+
+
+K8S安装
+----------------------------------
+- 设置主机名称：
+	1. hostnamectl set-hostname k8s-master
+	2. hostnamectl set-hostname k8s-node01
+	3. hostnamectl set-hostname k8s-node02
+- 设置DNS解析IP：此处通过修改host文件
+   1. vim /etc/hosts
+   2. 文件末尾添加：
+		121.36.148.61 k8s-master01
+		119.3.29.205 k8s-node01
+		121.36.131.14 k8s-node02
+- 配置yum源：
+	1. wget -O /etc/yum.repos.d/CentOS-Base-huawei.repo https://mirrors.huaweicloud.com/repository/conf/CentOS-7-anon.repo
+	2. yum makecache
+- 安装依赖：
+	1. yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
